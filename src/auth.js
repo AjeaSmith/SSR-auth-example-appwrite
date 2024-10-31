@@ -2,12 +2,11 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createAdminClient, createSessionClient } from "./appwrite/config";
 
-
 const auth = {
 	user: null,
 	sessionCookie: null,
 	getUser: async () => {
-		auth.sessionCookie = cookies().get("session");
+		auth.sessionCookie = (await cookies()).get("session");
 		try {
 			const { account } = await createSessionClient(auth.sessionCookie.value);
 			auth.user = await account.get();
