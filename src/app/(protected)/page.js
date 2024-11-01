@@ -1,4 +1,11 @@
+import axiosInstance from "../lib/axiosinstance";
+
 export default async function Home() {
+	const response = await axiosInstance({
+		url: "http://localhost:3000/api/orders",
+		method: "get",
+	});
+	const orders = response.data.orders;
 	return (
 		<main className="container mx-auto max-w-[800px]">
 			<div id="orders-container">
@@ -9,8 +16,6 @@ export default async function Home() {
 					<thead>
 						<tr>
 							<th>Customer</th>
-							<th>Status</th>
-							<th>Type</th>
 							<th>Total</th>
 						</tr>
 					</thead>
@@ -21,8 +26,7 @@ export default async function Home() {
 									<strong>{order.customer}</strong>
 									<p>{order.customer_email}</p>
 								</td>
-								<td>{order.status}</td>
-								<td>{order.type}</td>
+
 								<td>${order.total}</td>
 							</tr>
 						))}

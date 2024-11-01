@@ -1,22 +1,23 @@
 # SSR Auth flow using Appwrite node SDK
 
-**(on the server)**
-When a user logs in,
+## Login Page
 
-- The account is created and session is stored in cookie (securely) on in the browser. 
-- user gets redirect to home page
-- Any requests made, will need to have session cookie attached. Because only authenticated users with sessions can make requests to DB. 
+Checks if there is already a user session. if so, redirects auth user to protected page using the ```getUser``` method from **auth.js**.
 
+when form is submitted, the ```createSession``` method 
+- store's the session in a cookie safely in the browser. 
+- creates the account in appwrite DB.
+- redirects user to protected page
+
+## Header Component
+Gets the current user, again using ```getUser```. When a user logs out, the ```deleteSession``` method removes session from cookie and from appwrite.  
+
+
+## Protected Route
+uses axios to fetch data from appwrite DB, passing along the session cookie with the request. (see ```axiosinstance.js```) The session cookie needs to be passed in on every request, to ensure only auth users are making requests to DB. 
 
 
 ## Additional Notes
-- **Middleware.js** checks for auth user before routing to requested page
-- **auth.js** contains methods 
-    - **createSession** *(used in login page)*
-        - creates account in appwrite from form data, that account returns a session which is stored in a cookie securly in the browser.
-    - **getUser** *(used in middleware file)*
-        - gets the session from cookie, then finds the user by that session. lastly, set and return user/session. 
-    - **deleteSession** *(when user logs out)*
-        - gets the session from cookie, delete that session from DB, then delete the session from cookie. 
 
+- **Middleware.js** checks for auth user (```getUser```) before routing to requested page
 

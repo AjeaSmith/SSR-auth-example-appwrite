@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
-	const sessionCookie = cookies().get("session");
+	const sessionCookie = (await cookies()).get("session");
 
 	try {
 		const { databases } = await createSessionClient(sessionCookie.value);
