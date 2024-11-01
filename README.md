@@ -10,14 +10,19 @@ when form is submitted, the ```createSession``` method
 - redirects user to protected page
 
 ## Header Component
-Gets the current user, again using ```getUser```. When a user logs out, the ```deleteSession``` method removes session from cookie and from appwrite.  
+Gets the current user, again using ```getUser```. When a user logs out, the ```deleteSession``` method removes session from cookie and from Appwrite.  
 
 
 ## Protected Route
-uses axios to fetch data from appwrite DB, passing along the session cookie with the request. (see ```axiosinstance.js```) The session cookie needs to be passed in on every request, to ensure only auth users are making requests to DB. 
+uses axios to fetch data from Appwrite DB, passing along the session cookie with the request. (see ```axiosinstance.js```) The session cookie needs to be passed in on every request, to ensure only auth users are making requests to DB. 
 
 
 ## Additional Notes
 
 - **Middleware.js** checks for auth user (```getUser```) before routing to requested page
+- Inside Appwrite DB, grant authenticated users permission to either Read, Write, Update or delete collections. If not, a 403 error will occur saying user doesn't have permission to access that collection.
+*see image*
+![Screenshot](public/images/screenshot.png)
+
+
 
