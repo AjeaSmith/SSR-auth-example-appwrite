@@ -2,7 +2,6 @@ import { signInWithGithub } from "../lib/server/oauth";
 import { getLoggedInUser } from "../lib/server/appwrite";
 
 import { redirect } from "next/navigation";
-import { signInWithEmail } from "../lib/server/actions";
 import Link from "next/link";
 import SigninForm from "@/components/SigninForm";
 
