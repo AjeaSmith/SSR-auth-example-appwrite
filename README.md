@@ -22,6 +22,8 @@ if no user, form will be submitted, using the ```signInWithEmail``` method
 - creates the account in appwrite DB.
 - redirects user to protected page
 
+### Header Component
+Show's basic info about current user
 
 ### Home Page Route
 Checks for auth user, if not redirects to sign-up page
